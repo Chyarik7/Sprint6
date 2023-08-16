@@ -3,8 +3,8 @@ package com.example;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
@@ -12,14 +12,15 @@ import java.util.List;
 import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
-    @Mock
-    Feline felineMock;
+    @Spy
+    private Feline feline;
 
-    // получить название семейства
     @Test
+    // получить название семейства
     public void getNameFamily() {
         Feline feline = new Feline();
-        System.out.println(feline.getFamily());
+        String expectedResult = "Кошачьи";
+        assertEquals(feline.getFamily(), expectedResult);
     }
     // сравнить два названия семейства
     @Test
@@ -30,14 +31,16 @@ public class FelineTest {
     // мок Проверить аргументы
     @Test
     public void checkArgumentsMock() {
-        felineMock.getFamily();
-        Mockito.verify(felineMock).getFamily();
+        feline.getFamily();
+        Mockito.verify(feline).getFamily();
     }
     // получить список еды
     @Test
     public void getListWhoEatMeat() throws Exception{
-        Feline feline = new Feline();
-        System.out.println(feline.eatMeat());
+            Feline feline = new Feline();
+            List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+            List<String> actualFood = feline.eatMeat();
+            Assert.assertEquals(expectedFood, actualFood);
     }
     // сравнить два списка с едой
     @Test
@@ -45,21 +48,14 @@ public class FelineTest {
         Feline feline = new Feline();
         Assert.assertEquals("Хищники относятся к семейству кошачьих", List.of("Животные", "Птицы", "Рыба"), feline.eatMeat());
     }
-    // мок Проверить, сколько раз вызвали метод
-    @Test
-    public void howManyTimesMethodCalledMock() throws Exception {
-        felineMock.eatMeat();
-        felineMock.eatMeat();
-        felineMock.eatMeat();
-        felineMock.eatMeat();
-        felineMock.eatMeat();
-        Mockito.verify(felineMock, Mockito.times(5)).eatMeat();
-    }
+
     // получить количество котят
     @Test
     public void getKittens() {
         Feline feline = new Feline();
-        System.out.println(feline.getKittens());
+        int expectedCount = 1;
+        int actualCount = feline.getKittens();
+        Assert.assertEquals(expectedCount, actualCount);
     }
     // сравнить два неверных значения
     @Test
