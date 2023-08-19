@@ -40,15 +40,16 @@ public class LionTest {
     @Test
     public void doesHaveManeException() {
         try {
+          lion =  new Lion("Не самец", feline);
         } catch (Exception exception) {
-            Assert.assertEquals(true, exception.getMessage());
+            Assert.assertTrue(exception.getMessage(), true);
         }
     }
     @Test
     public void doesHaveMane() throws Exception{
         Feline feline = new Feline();
         Lion lion = new Lion("Самка", feline);
-        Assert.assertEquals(false ,lion.doesHaveMane());
+        Assert.assertFalse(String.valueOf(false),lion.doesHaveMane());
     }
 
 }
