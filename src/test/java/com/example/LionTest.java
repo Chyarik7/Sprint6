@@ -40,7 +40,7 @@ public class LionTest {
 @Test
     public void doesHaveManeException() {
         try {
-            lion = new Lion("Нечто", feline);
+            lion = new Lion("Не самец", feline);
         } catch (Exception exception) {
             Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
         }
