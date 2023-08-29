@@ -9,6 +9,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
@@ -39,10 +41,11 @@ public class LionTest {
     }
 @Test
     public void doesHaveManeException() {
-        try {
-            lion = new Lion("Не самец!", feline);
-        } catch (Exception exception) {
-            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
-        }
+    try {
+        Lion lion = new Lion("Не самец", feline);
+        Assert.assertTrue(lion.hasMane); // тк он не самец, внутри переменная hasMane будет равно false
+    } catch(Exception exception) {
+        Assert.fail(exception.getMessage()); // это про комментарий, что тест не должен использовать System.out.println
+    }
     }
 }
