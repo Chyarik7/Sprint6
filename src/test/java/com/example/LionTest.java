@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
     private Lion lion;
@@ -36,16 +35,17 @@ public class LionTest {
     @Test
     public void getFoodTest() throws Exception {
         Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-        Lion lion = new Lion("Самец", feline);
+        lion = new Lion("Самец", feline);
         Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
     }
-@Test
+    @Test
     public void doesHaveManeException() {
-    try {
-        Lion lion = new Lion("Не самец", feline);
-        Assert.assertTrue(lion.hasMane); // тк он не самец, внутри переменная hasMane будет равно false
-    } catch(Exception exception) {
-        Assert.fail(exception.getMessage()); // это про комментарий, что тест не должен использовать System.out.println
-    }
+
+        try {
+            lion = new Lion("Не самец", feline);
+        } catch(Exception exception) {
+            return;
+        }
+        fail("тест должен падать, но не упал");
     }
 }
